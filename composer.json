@@ -1,0 +1,25 @@
+{
+	"require": {
+		"vlucas/phpdotenv": "^5.4",
+		"illuminate/routing": "^8.80",
+		"illuminate/events": "^8.80",
+		"jenssegers/blade": "^1.4",
+		"filp/whoops": "^2.14",
+		"rakit/validation": "^1.4",
+		"ramsey/uuid": "^4.2"
+	},
+	"autoload": {
+		"classmap": [
+			"App/Controllers",
+			"App/Models",
+			"App/Traits",
+			"App/Drivers",
+			"libraries",
+			"App/Middlewares",
+			"App/Rules"
+		],
+		"psr-4": {
+			"Controller\\": "app/Controllers"
+		}
+	}
+}
