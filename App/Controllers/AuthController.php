@@ -60,8 +60,7 @@ class AuthController extends BaseController {
     $validate = $this->validate($request, [
       'email'  => 'required|email',
       'password'  => 'required',
-    ]);
-    
+    ]);    
 
     if($validate->fail()) {
       $this->flashSession('error', $validate->firstError());
@@ -71,30 +70,35 @@ class AuthController extends BaseController {
     try {
       $usr = $user->findBy('email', $request->email);
 
-      if(password_verify($request->password, $usr->password)) {
+      if($usr && password_verify($request->password, $usr->password)) {
         $sessionUUID = Uuid::uuid4()->toString();
 
         $user->updateToken([$sessionUUID, $usr->id]);
 
         $this->setSession('auth', $sessionUUID);
-        if($usr->role == 'customer' || $usr->role == 'seller') {
-          $this->redirect('/');
-        } else if($user->role == 'admin') {
+        if($usr->role == 'customer') {
+          $this->redirect('/user');
+        } else if ($usr->role == 'seller') {
+          $this->redirect('/seller');
+        }else if($user->role == 'admin') {
           $this->redirect('/admin');
         }
       }
 
       
     } catch(\Exception $e) {
-      dd($e);
       $this->flashSession('error', 'User not found');
       $this->redirect('/login');
     }
-    
 
+    $this->flashSession('error', 'User not found');
+    $this->redirect('/login');
 
+  }
 
-    dd($user);
-
+  public function logout(User $usr) {
+    $usr->logout();
+    $this->flashSession('success', 'Logout success');
+    $this->redirect('/');
   }
 }

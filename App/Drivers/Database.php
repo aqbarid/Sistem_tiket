@@ -3,10 +3,9 @@
 namespace App\Drivers;
 use PDO;
 
-class Database {
+class Database extends PDO {
 
   public $db;
-
 
   public function __construct()
   {

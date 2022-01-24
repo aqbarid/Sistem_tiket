@@ -13,15 +13,17 @@ class Model extends Database {
     parent::__construct();
   }
 
-  public function query($query, $params, $fetch=null) {
-    $stm = $this->db->parepare($query);
-    $stm->execute($params);
+  public function runQuery($query, $arguments = [], $fetch = null) {
+    $stm = $this->db->prepare($query);
+    $stm->execute($arguments);
+    $result = null;
     if($fetch == 'all') {
-      return $stm->fetch(PDO::FETCH_OBJ);
+        $result = $stm->fetch(PDO::FETCH_OBJ);
     } else if($fetch == 'first') {
-      return $stm->fetch();
+      $result = $stm->fetch();
     }
+    return $result;
+    
   }
-
 
 }
