@@ -21,7 +21,7 @@
               My Places</a>
           </li>
           <li class="list-group-item">
-            <a href="/" class="btn-link text-decoration-none">My Rooms</a>
+            <a href="/seller/room" class="btn-link text-decoration-none">My Rooms</a>
           </li>
           <li class="list-group-item">
             <a href="/logout" class="btn-link text-decoration-none">Logout</a>

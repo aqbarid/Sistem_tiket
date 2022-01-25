@@ -3,11 +3,15 @@ namespace App\Controllers;
 use Illuminate\Http\Request;
 use App\Controllers\BaseController;
 
-class HomeController extends BaseController {
-  public function index() {
-    $request  = (object) Request::capture()->all();
+use App\Models\User;
 
-    return $this->view('home');
+class HomeController extends BaseController {
+  public function index(User $usr) {
+    $request  = (object) Request::capture()->all();
+    
+    $user = $usr->auth();
+
+    return $this->view('home', ['user' => $user]);
   }
 }
 

@@ -17,9 +17,6 @@
 			"libraries",
 			"App/Middlewares",
 			"App/Rules"
-		],
-		"psr-4": {
-			"Controller\\": "app/Controllers"
-		}
+		]
 	}
 }
