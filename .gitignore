@@ -1,2 +1,3 @@
 storages/cache/*
 vendor
+public/uploads/*

@@ -6,8 +6,10 @@ use App\Middlewares\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 // owner
-use App\Controllers\Owner\PlaceOwnerController;
-use App\Controllers\Owner\RoomControler;
+use App\Controllers\Owner\OwnerPlaceController;
+use App\Controllers\Owner\OwnerRoomController;
+use App\Controllers\RoomController;
+use App\Controllers\PlaceController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -17,18 +19,21 @@ Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login', [AuthController::class, 'postLogin']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::get('/rooms/{id}', [RoomController::class, 'detail']);
+Route::get('/place/{id}', [PlaceController::class, 'detail']);
+
 Route::middleware([AuthMiddleware::class])
     ->prefix('/seller')
     ->group(function () {
         Route::get('/', [SellerController::class, 'index']);
-        Route::get('/place', [PlaceOwnerController::class, 'index']);
-        Route::post('/place', [PlaceOwnerController::class, 'createOrUpdate']);
+        Route::get('/place', [OwnerPlaceController::class, 'index']);
+        Route::post('/place', [OwnerPlaceController::class, 'createOrUpdate']);
         
-        Route::get('/room', [RoomControler::class, 'index']);
-        Route::get('/room/create', [RoomControler::class, 'create']);
-        Route::post('/room', [RoomControler::class, 'store']);
-        Route::get('/room/{id}', [RoomControler::class, 'detail']);
-        Route::put('/room/{id}', [RoomControler::class, 'update']);
-        Route::get('/delete/{id}', [RoomControler::class, 'delete']);
+        Route::get('/room', [OwnerRoomController::class, 'index']);
+        Route::get('/room/create', [OwnerRoomController::class, 'create']);
+        Route::post('/room', [OwnerRoomController::class, 'store']);
+        Route::get('/room/{id}', [OwnerRoomController::class, 'detail']);
+        Route::put('/room/{id}', [OwnerRoomController::class, 'update']);
+        Route::get('/delete/{id}', [OwnerRoomController::class, 'delete']);
     });
 

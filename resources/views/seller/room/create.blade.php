@@ -24,9 +24,10 @@
     <div class="card p-3">
       <div class="row">
         <div class="col-md-6">
-         <form action="/seller/room" method="POST">
+         <form action="/seller/room" method="POST" enctype="multipart/form-data">
             @include('components.input', ['name' => 'name', 'label' => 'Place Name'])
             @include('components.input', ['name' => 'type', 'label' => 'Room Type'])
+            @include('components.input', ['name' => 'image', 'label' => 'Room Image', 'type' => 'file'])
             @include('components.input', ['name' => 'price_monthly', 'label' => 'Price Monthly'])
             @include('components.input', ['name' => 'price_daily', 'label' => 'Price Daily'])
             @include('components.input', ['name' => 'description', 'label' => 'Description', 'type' => 'textarea'])

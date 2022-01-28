@@ -1,6 +1,11 @@
 @extends('layouts/app')
 
 <style>
+  .banner-image {
+    height: 650px;
+    object-fit: cover;
+  }
+
   .card-image {
     height: 200px;
     width: 100%;
@@ -41,11 +46,12 @@
         </button>
       </div>
     </div>
+    </div>
   </section>
   <section class="list mt-5 pb-5">
     <div class="container">
-      <h2 class="fw-bold">Kosan Terbaru</h2>
-      <div class="row mt-4">
+      <h1 class="text-center py-5">Kamar Di <span class="text-primary fw-bold">{{ $place->name }}</span></h1>
+      <div class="row">
         @foreach ($rooms as $key => $room )
           <div class="col-md-4">
             <a href="/rooms/{{ $room->id }}" class="text-decoration-none  ation-none">

@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top bg-primary text-white sticky-top">
     <div class="container container-fluid ">
-      <a class="navbar-brand" href="#">Kosan</a>
+      <a class="navbar-brand" href="/">
+        <i class='bx bxs-home h2 py-0 my-0'></i>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
           @if(isset($user->name))
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,7 +30,8 @@
             </ul>
           </li>
           @else
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link text-white me-3" href="/register">Register</a>
+          <a class="btn bg-white text-primary fw-bold px-3" href="/login">Login</a>
           @endif
         </div>
       </div>

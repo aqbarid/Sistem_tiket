@@ -26,6 +26,17 @@ class Place extends Model {
       }
   }
 
+  public function getBanners($placeid) {
+    return $this->runQuery("
+    SELECT
+    CONCAT('/uploads/', image) AS image
+    FROM rooms
+    JOIN places
+      ON places.id = rooms.place_id
+    WHERE places.id = ?
+    LIMIT 5 ", [$placeid], 'all');
+  }
+
   public function storeOrUpdate($name, $address, $contact, $description) {
     $user = (new User())->auth();
 

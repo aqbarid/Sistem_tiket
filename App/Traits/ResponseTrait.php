@@ -10,6 +10,11 @@ trait ResponseTrait {
     public function unauthorize($json = null) {
       header("HTTP/1.1 401 Unauthorized");
     }
+
+    public function notFound($json = null) {
+      header("HTTP/1.1 404 NotFound");
+      return $this->view('errors.404', []);
+    }
     
     public function redirect($location) {
       header("location: $location", true, 301);
@@ -27,7 +32,7 @@ trait ResponseTrait {
       header("HTTP/1.1 422 Unprocessable Entity");
     }
     public function end() {
-      die();
+      exit();
     }
 }
 

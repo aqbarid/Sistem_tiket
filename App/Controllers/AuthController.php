@@ -80,7 +80,7 @@ class AuthController extends BaseController {
           $this->redirect('/user');
         } else if ($usr->role == 'seller') {
           $this->redirect('/seller');
-        }else if($user->role == 'admin') {
+        }else if($usr->role == 'admin') {
           $this->redirect('/admin');
         }
       }

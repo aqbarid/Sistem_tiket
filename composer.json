@@ -17,6 +17,9 @@
 			"libraries",
 			"App/Middlewares",
 			"App/Rules"
+		],
+		"files": [
+			"helpers/helper.php"
 		]
 	}
 }

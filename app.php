@@ -5,6 +5,7 @@ use Libraries\Router;
 use Whoops\Run as WoopsRun;
 use Whoops\Handler\PrettyPageHandler;
 // use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 // start session
 session_start();
@@ -19,6 +20,8 @@ $dotenv->load();
 $whoops = new WoopsRun;
 $whoops->pushHandler(new PrettyPageHandler);
 $whoops->register();
+
+$_ENV['BASE_PATH'] = $basepath;
 
 
 Router::bootstrap($basepath, function($ex) {

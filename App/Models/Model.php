@@ -18,7 +18,7 @@ class Model extends Database {
     $stm->execute($arguments);
     $result = null;
     if($fetch == 'all') {
-        $result = $stm->fetch(PDO::FETCH_OBJ);
+        $result = $stm->fetchAll(PDO::FETCH_OBJ);
     } else if($fetch == 'first') {
       $result = $stm->fetch();
     }

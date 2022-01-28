@@ -6,7 +6,7 @@ use App\Models\Place;
 use App\Models\User;
 use Exception;
 
-class PlaceOwnerController extends BaseController {
+class OwnerPlaceController extends BaseController {
 
   public function index(Place $place, User $usr) {
     $user = $usr->auth();

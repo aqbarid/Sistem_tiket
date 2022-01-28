@@ -26,23 +26,29 @@
     @error
     @success
     <div class="row">
-      <div class="col-md-4">
-        <a href="" class="text-decoration-none">
-          <div class="card rounded-0">
-            <div class="card-image">
-              <img src="https://media.istockphoto.com/photos/large-cargo-airplane-taking-off-picture-id1201849974" alt="">
-            </div>
-            <div class="card-content">
-              <div class="container-fluid py-3">
-                <h4 class="text-dark fw-bold">oiuytrerty</h4>
-                <h5 class="text-warning">500k</h5>
-                <span class="badge bg-success">Available</span>
-                <p class="text-body">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+      @foreach ($rooms as $room)
+        <div class="col-md-4">
+          <a href="" class="text-decoration-none">
+            <div class="card rounded-0">
+              <div class="card-image">
+                <img src="{{ $room->image }}" alt="">
+              </div>
+              <div class="card-content">
+                <div class="container-fluid py-3">
+                  <h4 class="text-dark fw-bold">{{ $room->name }}</h4>
+                  <h5 class="text-warning">{{ $room->price_monthly }}k</h5>
+                  @if($room->is_available)
+                  <span class="badge bg-success">Available</span>
+                  @endif
+                  <p class="text-body mt-2">
+                    {{ limitText($room->description) }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+      @endforeach
     </div>
   </div>
 
