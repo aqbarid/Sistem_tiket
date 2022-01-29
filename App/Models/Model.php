@@ -20,7 +20,7 @@ class Model extends Database {
     if($fetch == 'all') {
         $result = $stm->fetchAll(PDO::FETCH_OBJ);
     } else if($fetch == 'first') {
-      $result = $stm->fetch();
+      $result = $stm->fetch(PDO::FETCH_OBJ);
     }
     return $result;
     

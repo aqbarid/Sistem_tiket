@@ -12,6 +12,7 @@
   
   <section class="banner mt-5">
     <div class="container">
+      @error
       <img src="{{ $room->image }}" class="banner-image w-100" alt="">
     </div>
   </section>
@@ -40,7 +41,7 @@
       </div>
       <div class="w-100 py-4">
         <form action="/checkout" method="POST">
-          <input type="hidden" name="{{ $room->id }}">
+          <input type="hidden" name="room_id" value="{{ $room->id }}">
           <button class="btn btn-primary">Ambil Kamar Ini</button>
         </form>
       </div>

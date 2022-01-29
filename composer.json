@@ -6,7 +6,8 @@
 		"jenssegers/blade": "^1.4",
 		"filp/whoops": "^2.14",
 		"rakit/validation": "^1.4",
-		"ramsey/uuid": "^4.2"
+		"ramsey/uuid": "^4.2",
+		"nesbot/carbon": "^2.56"
 	},
 	"autoload": {
 		"classmap": [

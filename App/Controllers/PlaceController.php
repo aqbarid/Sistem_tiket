@@ -18,6 +18,7 @@ class PlaceController extends BaseController {
     }
 
     $rooms = $rm->whereBy('place_id', $placeId);
+    $place->user = $usr->findById($place->user_id);
 
     $rooms = new Collection($rooms); 
     $rooms = (object) $rooms->map(function($itm) {

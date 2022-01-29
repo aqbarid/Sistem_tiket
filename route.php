@@ -10,6 +10,7 @@ use App\Controllers\Owner\OwnerPlaceController;
 use App\Controllers\Owner\OwnerRoomController;
 use App\Controllers\RoomController;
 use App\Controllers\PlaceController;
+use App\Controllers\CheckoutController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -21,6 +22,14 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/rooms/{id}', [RoomController::class, 'detail']);
 Route::get('/place/{id}', [PlaceController::class, 'detail']);
+
+Route::middleware([AuthMiddleware::class])
+    ->group(function () {
+        Route::post('/checkout', [CheckoutController::class, 'checkout']);
+        Route::post('/checkout/payment', [CheckoutController::class, 'payment']);
+        Route::get('/checkout/payment/{id}', [CheckoutController::class, 'tryPayment']);
+        Route::post('/checkout/payment/{id}', [CheckoutController::class, 'postPayment']);
+    });
 
 Route::middleware([AuthMiddleware::class])
     ->prefix('/seller')

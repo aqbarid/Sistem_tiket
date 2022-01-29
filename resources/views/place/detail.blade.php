@@ -50,7 +50,24 @@
   </section>
   <section class="list mt-5 pb-5">
     <div class="container">
-      <h1 class="text-center py-5">Kamar Di <span class="text-primary fw-bold">{{ $place->name }}</span></h1>
+      <h1 class="fw-bold">{{ $place->name }}</h1>
+      <p>Oleh : {{ $place->user->name }}</p>
+      <p>{{ $place->description }}</p>
+      <table class="table" style="max-width:500px">
+        <tr>
+          <td class="px-0">Jumlah Kamar :</td>
+          <td class="px-0">{{ count((array)$rooms) }}</td>
+        </tr>
+        <tr>
+          <td class="px-0">Kontak :</td>
+          <td class="px-0">{{ $place->contact }}</td>
+        </tr>
+        <tr>
+          <td class="px-0">Alamat :</td>
+          <td class="px-0">{{ $place->address }}</td>
+        </tr>
+      </table>
+      <h3 class="text-left py-5">Kamar Di <span class="text-primary fw-bold">{{ $place->name }}</span></h3>
       <div class="row">
         @foreach ($rooms as $key => $room )
           <div class="col-md-4">
