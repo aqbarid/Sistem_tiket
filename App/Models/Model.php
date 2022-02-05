@@ -15,7 +15,7 @@ class Model extends Database {
 
   public function runQuery(string $query, array $arguments = [], $fetch = null) {
     $stm = $this->db->prepare($query);
-    $stm->bindParam(':table', $this->table, PDO::PARAM_STR);
+    // $stm->bindParam(':table', $this->table, PDO::PARAM_STR);
     $stm->execute($arguments);
     $result = null;
     if($fetch == 'all') {
