@@ -44,7 +44,8 @@ class Router {
       'Request' => 'Illuminate\Support\Facades\Request',
       'Response' => 'Illuminate\Support\Facades\Response',
       'Route' => 'Illuminate\Support\Facades\Route',
-      'URL' => 'Illuminate\Support\Facades\URL'
+      'URL' => 'Illuminate\Support\Facades\URL',
+      'Carbon' => 'Carbon\Carbon'
     );
 
     /**

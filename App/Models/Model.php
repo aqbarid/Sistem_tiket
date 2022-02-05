@@ -13,8 +13,9 @@ class Model extends Database {
     parent::__construct();
   }
 
-  public function runQuery($query, $arguments = [], $fetch = null) {
+  public function runQuery(string $query, array $arguments = [], $fetch = null) {
     $stm = $this->db->prepare($query);
+    $stm->bindParam(':table', $this->table, PDO::PARAM_STR);
     $stm->execute($arguments);
     $result = null;
     if($fetch == 'all') {
@@ -23,7 +24,8 @@ class Model extends Database {
       $result = $stm->fetch(PDO::FETCH_OBJ);
     }
     return $result;
-    
   }
+
+
 
 }

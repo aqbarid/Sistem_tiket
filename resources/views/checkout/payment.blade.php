@@ -27,6 +27,11 @@
         <td>087654567890876 </td>
       </tr>
       <tr>
+        <td>Waktu </td>
+        <td>:</td>
+        <td>{{ $transaction->days > 0 ? $transaction->days : $transaction->months }} {{ $transaction->days > 0 ? 'Hari' : 'Bulan' }} </td>
+      </tr>
+      <tr>
         <td>Jumlah </td>
         <td>:</td>
         <td>IDR {{ $transaction->total }} </td>
@@ -34,6 +39,12 @@
     </table>
     
     <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
+    
+    <div class="form-group">
+      <label for="total" class="col-form-label">Nama Bank </label>
+      <input type="text" placeholder="BANK JAGO" class="form-control" name="bank" >
+    </div>
+
     <div class="form-group">
       <label for="total" class="col-form-label">Nama Akun </label>
       <input type="text" placeholder="Dominic Toreto" class="form-control" name="account_name" >
@@ -44,7 +55,7 @@
     </div>
     <div class="form-group">
       <label for="total" class="col-form-label">Jumlah </label>
-      <input type="text" placeholder="10.000" class="form-control" name="account_number" >
+      <input type="text" placeholder="10.000" class="form-control" name="total" >
     </div>
     <div class="form-group">
       <label for="total" class="col-form-label">Bukti </label>

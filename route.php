@@ -12,6 +12,13 @@ use App\Controllers\RoomController;
 use App\Controllers\PlaceController;
 use App\Controllers\CheckoutController;
 
+// user
+use App\Controllers\User\UserMainController;
+use App\Controllers\User\UserSettingController;
+
+// admin
+use App\Controllers\Admin\AdminController;
+
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/register', [AuthController::class, 'register']);
@@ -43,6 +50,31 @@ Route::middleware([AuthMiddleware::class])
         Route::post('/room', [OwnerRoomController::class, 'store']);
         Route::get('/room/{id}', [OwnerRoomController::class, 'detail']);
         Route::put('/room/{id}', [OwnerRoomController::class, 'update']);
-        Route::get('/delete/{id}', [OwnerRoomController::class, 'delete']);
+        Route::delete('/room/{id}', [OwnerRoomController::class, 'delete']);
     });
+
+
+
+Route::middleware([AuthMiddleware::class])
+    ->prefix('/user')
+    ->group(function () {
+        Route::get('/', [UserMainController::class, 'index']);
+        Route::get('/transactions', [UserMainController::class, 'transaction']);
+        Route::get('/setting', [UserSettingController::class, 'show']);
+        Route::put('/setting', [UserSettingController::class, 'update']);
+});
+
+
+
+
+Route::middleware([AuthMiddleware::class])
+    ->prefix('/admin')
+    ->group(function () {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::get('/places', [AdminController::class, 'place']);
+        Route::get('/rooms', [AdminController::class, 'room']);
+        Route::get('/transactions', [AdminController::class, 'transaction']);
+        Route::get('/transaction/{id}', [AdminController::class, 'detailTransaction']);
+        Route::post('/transaction/{id}', [AdminController::class, 'processTransaction']);
+});
 

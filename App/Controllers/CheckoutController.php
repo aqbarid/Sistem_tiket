@@ -17,6 +17,8 @@ class CheckoutController extends BaseController {
 
     $room = $rm->findById($request->room_id);
 
+
+
     if(!$room) {
       $this->notFound();
     }
@@ -47,9 +49,9 @@ class CheckoutController extends BaseController {
   }
 
   public function tryPayment($id, Transaction $trs, Room $rm) {
-    $transaction = $trs->findById($id);
+    $transaction = $trs->findIsPending($id);
     if(!$transaction) {
-      return $this->notFound();
+      return $this->notFound('This transaction is not found or allready paid');
     }
     $room = $rm->findById($transaction->room_id);
     $room->image = '/uploads/'.$room->image;
@@ -62,36 +64,34 @@ class CheckoutController extends BaseController {
     $validate = $this->validate($_POST + $_FILES, [
       'transaction_id' => 'required',
       'account_name' => 'required',
+      'bank' => 'required',
+      'total' => 'required',
       'account_number' => 'required',
-      'file' => 'required|uploaded_file:0,5M,png,jpeg,jpg'
+      'file' => 'required|uploaded_file:0,5M,png,jpeg,jpg,pdf'
     ]);
 
     $currentTransaction = $trs->findIsPending($request->transaction_id);
 
     if(!$currentTransaction) {
-      $this->flashSession('error', 'Transaction Not found');
+      $this->flashSession('error', 'Transaction Not found Or Allready Paid');
       return $this->redirect('/checkout/payment/'.$request->transaction_id); 
     }
 
     if($validate->fail()) {
       $this->flashSession('error', $validate->firstError());
-     return $this->redirect('/checkout/payment/'.$request->transaction_id);
+      return $this->redirect('/checkout/payment/'.$request->transaction_id);
     }
 
     $fileName = $request->file->hashName();
     $fileDir = $_ENV['BASE_PATH'].'/public/uploads/'.$fileName;
     move_uploaded_file($_FILES["file"]["tmp_name"], $fileDir);
 
-    // dd($fileDir);
-
-    // $pay -> 
-    // dd($request->file->hashName());
-
-    // Storage::disk('local')->put('uploads/'.$fileName, $request->file, 'public');
-
-    // $pay->createPayment([transaction_id, bank, account_name, account_number, total, file]);
-
+    $pay->createPayment([$currentTransaction->id, $request->bank, $request->account_name, $request->account_number, $request->total, $fileName]);
     
+    $trs->setStatus($currentTransaction->id);
+
+    $this->flashSession('success', 'Payment submited');
+    $this->redirect('/user/transactions');
   }
 }
 

@@ -42,7 +42,6 @@ class AuthController extends BaseController {
     }
 
 
-
     try {
       $user->register($request->email, $request->name, $request->address, $request->phone, $request->password, $request->role);
     } catch(\Exception $e) {
@@ -55,7 +54,6 @@ class AuthController extends BaseController {
 
   public function postLogin(User $user) {
     $request  = (object) Request::capture()->all();
-
 
     $validate = $this->validate($request, [
       'email'  => 'required|email',

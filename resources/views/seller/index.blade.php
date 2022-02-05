@@ -2,8 +2,12 @@
 
 @section('content')
   <div class="w-100">
-    <h2 class="text-dark fw-bold">Welcome {{ $user->name }} ON Place {{ isset($place->name) ? $place->name : '-' }}</h2>
+    <div class="card p-3 bg-primary">
+      <h2 class="text-dark fw-bold text-white mt-3 mb-3">Hi {{ $user->name }}</h2>
+      <h5 class="text-white fw-normal">Welcome back to your space <span class="fw-bold">{{ isset($place->name) ? $place->name : '-' }}</span></h5>
+    </div>
   </div>
+  
   <div class="w-100 mt-3">
     <div class="row">
       <div class="col-md-4">

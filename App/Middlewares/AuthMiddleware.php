@@ -19,7 +19,7 @@ class AuthMiddleware extends Middleware {
 
     if(
       str_starts_with($request->getPathInfo(), '/seller') && $auth->role !== 'seller' || 
-      str_starts_with($request->getPathInfo(), '/user') && $auth->role !== 'user' ||
+      str_starts_with($request->getPathInfo(), '/user') && $auth->role !== 'customer' ||
       str_starts_with($request->getPathInfo(), '/admin') && $auth->role !== 'admin'
     ) {
       $this->flashSession('error', 'Forbidend modules');

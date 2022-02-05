@@ -14,16 +14,13 @@
       <div class="col-md-3">
         <ul class="list-group">
           <li class="list-group-item">
-            <a href="/admin" class="btn-link text-decoration-none">Dashboard</a>
+            <a href="/user" class="btn-link text-decoration-none">Dashboard</a>
           </li>
           <li class="list-group-item">
-            <a href="/admin/places" class="btn-link text-decoration-none">Places</a>
+            <a href="/user/transactions" class="btn-link text-decoration-none">Transaction</a>
           </li>
           <li class="list-group-item">
-            <a href="/admin/rooms" class="btn-link text-decoration-none">Rooms</a>
-          </li>
-          <li class="list-group-item">
-            <a href="/admin/transactions" class="btn-link text-decoration-none">Transactions</a>
+            <a href="/user/setting" class="btn-link text-decoration-none">Setting</a>
           </li>
           <li class="list-group-item">
             <a href="/logout" class="btn-link text-decoration-none">Logout</a>

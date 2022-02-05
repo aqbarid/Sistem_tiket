@@ -11,9 +11,9 @@ trait ResponseTrait {
       header("HTTP/1.1 401 Unauthorized");
     }
 
-    public function notFound($json = null) {
+    public function notFound($text = 'This page was not found') {
       header("HTTP/1.1 404 NotFound");
-      return $this->view('errors.404', []);
+      return $this->view('errors.404', ['text' => $text]);
     }
     
     public function redirect($location) {

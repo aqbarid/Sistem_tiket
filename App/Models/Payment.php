@@ -16,7 +16,7 @@ class Payment extends Model {
   
   /**
    * Fields
-   * - transaction_id
+   * - transaction_id   
    * - bank
    * - account_name
    * - account_number
@@ -26,8 +26,8 @@ class Payment extends Model {
    */
 
   public function createPayment($arguments) {
-    return $this->runQuery('
+    $this->runQuery('
       INSERT INTO payments (transaction_id, bank, account_name, account_number, total, file) VALUES(?, ?, ?, ?, ?, ?);
-      ', $arguments, 'first');
+      ', $arguments, 'first');    
   }
 }

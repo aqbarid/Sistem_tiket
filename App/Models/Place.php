@@ -58,4 +58,37 @@ class Place extends Model {
                     );
     }
   }
+
+  public function totalPlace() {
+    return $this->runQuery('SELECT COUNT(*) as count FROM places', [], 'first');
+  }
+
+  public function getAll(String $search = '') {
+    return $this->runQuery('
+      SELECT
+      p.*,
+      u.name as user_name,
+      (SELECT COUNT(*) FROM rooms AS rm WHERE rm.place_id = p.id) AS total_room,
+      (
+        SELECT COUNT(*) FROM transactions as tc
+        JOIN rooms as rm
+        ON rm.id = tc.room_id
+        WHERE rm.place_id = p.id
+      ) AS total_transaction,
+      (
+        SELECT SUM(total) FROM transactions as tc
+        JOIN rooms as rm
+        ON rm.id = tc.room_id
+        WHERE rm.place_id = p.id
+        AND tc.status = "success"
+      ) AS total_income
+      FROM places AS p
+      INNER JOIN users AS u
+      ON u.id = p.user_id
+      WHERE
+      p.name LIKE ?
+      ORDER BY total_transaction
+      ', ["%$search%"], 'all');
+  }
+
 }

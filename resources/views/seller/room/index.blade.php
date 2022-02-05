@@ -27,7 +27,7 @@
     @success
     <div class="row">
       @foreach ($rooms as $room)
-        <div class="col-md-4">
+        <div class="col-md-6 mb-3">
           <a href="" class="text-decoration-none">
             <div class="card rounded-0">
               <div class="card-image">
@@ -47,6 +47,23 @@
               </div>
             </div>
           </a>
+          <div class="w-100 mt-3">
+            <div class="row w-100 justify-content-center">
+              <div class="col-auto">
+                <a href="/rooms/{{ $room->id }}" class="btn btn-info text-white">View</a>
+              </div>
+              <div class="col-auto">
+                <a href="/seller/room/{{ $room->id }}" class="btn btn-warning text-white">Edit</a>
+              </div>
+              <div class="col-auto">
+                <form action="/seller/room/{{ $room->id }}" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+              
+            </div>
+          </div>
         </div>
       @endforeach
     </div>

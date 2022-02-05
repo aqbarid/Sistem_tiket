@@ -76,5 +76,55 @@ class Room extends Model {
     )
     ", [$user->id], 'all');
   }
+
+  public function getMyRoom($roomId) {
+    $user = (new User)->auth();
+    return $this->runQuery('
+      SELECT rooms.* from rooms
+      LEFT JOIN places
+      ON places.id = rooms.place_id
+      WHERE 
+      user_id = ?
+      AND rooms.id = ?
+    ', [$user->id, $roomId], 'first');
+  }
+
+
+  public function updateRoom(array $arguments) {
+    return $this->runQuery('
+        UPDATE rooms
+        SET name = ?,
+        description = ?,
+        type = ?,
+        image = ?,
+        price_monthly = ?,
+        price_daily = ?
+        WHERE id = ?',
+        $arguments
+      );
+  }
+
+  public function deleteRoom($roomId) {
+    return $this->runQuery('
+      DELETE FROM rooms WHERE id = ?
+    ', [$roomId]);
+  }
+
+  public function countAll() {
+    return $this->runQuery('SELECT COUNT(*) as count FROM rooms', [], 'first');
+  }
+
+  public function getAllAdminRooms($search = '') {
+    return $this->runQuery('
+      SELECT
+      rm.*,
+      pl.name as place_name,
+      (SELECT COUNT(*) FROM transactions AS tc WHERE tc.room_id = rm.id) total_transaction
+      FROM rooms as rm
+      INNER JOIN places AS pl
+      ON rm.place_id = pl.id
+      WHERE rm.name LIKE ?
+    ', ["%$search%"], 'all');
+  }
   
 }

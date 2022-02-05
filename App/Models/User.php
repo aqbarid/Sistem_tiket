@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Model {
 
@@ -51,6 +52,18 @@ class User extends Model {
       $stm->execute([null, $authUser->id]);
     }
     return true;
+  }
+
+  public function updateDetail(array $params) {
+    $authUser = $this->auth();
+    $this->runQuery('UPDATE users SET email = ?, name = ?, address = ?, phone = ? WHERE id = ?', array_merge($params, [$authUser->id]));
+  }
+
+  public function updatePassword($newPassword) {
+    $authUser = $this->auth();
+    $newPassword =password_hash($newPassword, PASSWORD_BCRYPT);
+    
+    $this->runQuery('UPDATE users SET password = ? WHERE id = ?', [$newPassword, $authUser->id]);
   }
 
 

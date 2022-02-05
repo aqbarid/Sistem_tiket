@@ -29,6 +29,8 @@
         </ul>
       </div>
       <div class="col-md-9">
+        @error
+        @success
         @yield('content')
       </div>
     </div>
