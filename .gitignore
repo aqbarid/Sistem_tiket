@@ -1,3 +1,4 @@
 storages/cache/*
 vendor
 public/uploads/*
+.env

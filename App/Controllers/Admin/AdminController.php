@@ -2,6 +2,7 @@
 namespace App\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Controllers\BaseController;
+use App\Models\Payment;
 use App\Models\Place;
 use App\Models\Room;
 use App\Models\Transaction;
@@ -53,6 +54,14 @@ class AdminController extends BaseController {
     $transactions = $ts->getAllTransactions();
 
     return $this->view('admin.transaction', ['transactions' => $transactions, 'totalTransaction' => $totalTransaction]);
+  }
+
+  public function detailTransaction($transactionId, Request $request, Transaction $ts, Payment $py) {
+    $payments = $py->whereBy('transaction_id', $transactionId);
+
+    $transaction = $ts->detailTransaction($transactionId);
+
+    dd($transaction);
   }
 }
 

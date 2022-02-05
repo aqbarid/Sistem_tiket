@@ -115,6 +115,32 @@ class Transaction extends Model {
     ', [], 'all');
   }
 
+  public function detailTransaction($id) {
+    return $this->runQuery('
+      SELECT
+      t.*,
+      r.name AS room_name,
+      r.id AS room_id,
+      p.name AS place_name,
+      p.id AS place_id,
+      u.name AS customer_name,
+      ad.name AS admin_name
+      FROM transactions as t
+      LEFT JOIN rooms as r
+      ON r.id = t.room_id
+      LEFT JOIN 
+      places as p
+      ON p.id = r.place_id
+      LEFT JOIN
+      users AS u
+      on t.customer_id = u.id 
+      LEFT JOIN
+      users AS ad
+      ON ad.id = t.admin_id
+      WHERE t.id = ?
+    ', [$id], 'first');
+  }
+
   public function totalAllTransaction($page=1, $limit=10) {
       try {
         return $this->runQuery('

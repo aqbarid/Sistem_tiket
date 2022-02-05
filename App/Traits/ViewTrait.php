@@ -12,8 +12,10 @@ trait ViewTrait {
 
   public function __construct()
   {
-    $this->viewPath = realpath('../resources/views');
-    $this->blade = new Blade($this->viewPath, '../storages/cache');    
+    $this->viewPath = $_ENV['BASE_PATH'].'/resources/views';
+    $this->cachePath = $_ENV['BASE_PATH'].'/storages/cache';
+    
+    $this->blade = new Blade($this->viewPath, $this->cachePath);    
     
     $this->blade->directive('success', function () {
       return '
