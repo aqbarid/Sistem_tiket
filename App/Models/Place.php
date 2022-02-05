@@ -47,7 +47,7 @@ class Place extends Model {
     } catch(\Exception $e) {
       //
     }
-
+mysql://tofik:R4m1$exT7U420@editor.tofikhidayat.xyz?statusColor=686B6F&enviroment=local&name=Tofik%20Develop&tLSMode=0&usePrivateKey=false&safeModeLevel=0&advancedSafeModeLevel=0&driverVersion=0
     if($storeId) {
       $this->runQuery('UPDATE places SET name = ?, address = ?, contact = ?, description = ? WHERE id = ?',
                     [$name, $address, $contact, $description, $storeId]
