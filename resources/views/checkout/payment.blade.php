@@ -11,6 +11,12 @@
 
     <h3 class="mt-4">Transfer Ke </h3>
     <table class="table">
+
+    <tr>
+        <td>ID Transaksi   </td>
+        <td>:</td>
+        <td>INV{{$transaction->id}} </td>
+      </tr>
       <tr>
         <td>Bank </td>
         <td>:</td>
@@ -27,14 +33,19 @@
         <td>087654567890876 </td>
       </tr>
       <tr>
-        <td>Waktu </td>
+        <td>Lama Penyewaan </td>
         <td>:</td>
         <td>{{ $transaction->days > 0 ? $transaction->days : $transaction->months }} {{ $transaction->days > 0 ? 'Hari' : 'Bulan' }} </td>
       </tr>
       <tr>
+        <td>Waktu </td>
+        <td>:</td>
+        <td>{{ $transaction->created_at }} </td>
+      </tr>
+      <tr>
         <td>Jumlah </td>
         <td>:</td>
-        <td>IDR {{ $transaction->total }} </td>
+        <td>IDR {{ $transaction->total+$transaction->id }} </td>
       </tr>
     </table>
     
@@ -55,7 +66,7 @@
     </div>
     <div class="form-group">
       <label for="total" class="col-form-label">Jumlah </label>
-      <input type="text" placeholder="10.000" class="form-control" name="total" >
+      <input type="text" value="{{$transaction->total+$transaction->id}}" class="form-control" name="total" readonly>
     </div>
     <div class="form-group">
       <label for="total" class="col-form-label">Bukti </label>

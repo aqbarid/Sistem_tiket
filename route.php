@@ -36,6 +36,8 @@ Route::middleware([AuthMiddleware::class])
         Route::post('/checkout/payment', [CheckoutController::class, 'payment']);
         Route::get('/checkout/payment/{id}', [CheckoutController::class, 'tryPayment']);
         Route::post('/checkout/payment/{id}', [CheckoutController::class, 'postPayment']);
+        Route::get('/success/{id}', [CheckoutController::class, 'successPayment']);
+        // Route::post('/success/{id}', [CheckoutController::class, 'postPayment']);
     });
 
 Route::middleware([AuthMiddleware::class])
@@ -44,7 +46,6 @@ Route::middleware([AuthMiddleware::class])
         Route::get('/', [SellerController::class, 'index']);
         Route::get('/place', [OwnerPlaceController::class, 'index']);
         Route::post('/place', [OwnerPlaceController::class, 'createOrUpdate']);
-        
         Route::get('/room', [OwnerRoomController::class, 'index']);
         Route::get('/room/create', [OwnerRoomController::class, 'create']);
         Route::post('/room', [OwnerRoomController::class, 'store']);

@@ -30,4 +30,11 @@ class Payment extends Model {
       INSERT INTO payments (transaction_id, bank, account_name, account_number, total, file) VALUES(?, ?, ?, ?, ?, ?);
       ', $arguments, 'first');    
   }
+  public function paymentDetails($id) {
+    return $this->runQuery('
+    SELECT p.*, 
+    t.status AS status, 
+    t.id AS id FROM payments as p LEFT JOIN transactions as t ON t.id = p.transaction_id WHERE p.transaction_id = ?
+    ', [$id], 'first');
+  }
 }

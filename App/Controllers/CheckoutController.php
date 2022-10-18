@@ -50,13 +50,23 @@ class CheckoutController extends BaseController {
 
   public function tryPayment($id, Transaction $trs, Room $rm) {
     $transaction = $trs->findIsPending($id);
+    
     if(!$transaction) {
-      return $this->notFound('This transaction is not found or allready paid');
+      // return $this->notFound('This transaction is not found or allready paid');
+      $this->redirect('/success/'.$id);
     }
     $room = $rm->findById($transaction->room_id);
     $room->image = '/uploads/'.$room->image;
 
     return $this->view('checkout.payment', ['transaction' => $transaction, 'room' => $room]);
+  }
+
+  public function successPayment($id, Transaction $trs, Payment $pay) {
+    //$payments = $pay->paymentDetails($id);
+    $transaction = $trs->detailTransaction($id);
+    dd($transactions);
+
+    return $this->view('checkout.success', ['transaction' => $transaction]);
   }
 
   public function postPayment(Request $request, Transaction $trs, Payment $pay) {
@@ -91,7 +101,7 @@ class CheckoutController extends BaseController {
     $trs->setStatus($currentTransaction->id);
 
     $this->flashSession('success', 'Payment submited');
-    $this->redirect('/user/transactions');
+    $this->redirect('/success/'.$request->transaction_id);
   }
 }
 

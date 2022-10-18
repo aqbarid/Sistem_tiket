@@ -161,7 +161,7 @@ class Transaction extends Model {
   }
 
   public function findIsPending($id) {
-    return $this->runQuery('SELECT * FROM transactions WHERE id = ? AND status = "pending"', [$id], 'first');
+    return $this->runQuery('SELECT * FROM transactions WHERE id = ? AND (status = "pending" OR status = "checking")', [$id], 'first');
   }
 
   public function myTransactionByStatus($status = 'pending') {
