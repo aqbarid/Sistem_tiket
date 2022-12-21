@@ -29,7 +29,14 @@
                 <td>{{ $item->admin_name ?? '-' }} </td>
                 <td>{{ $item->total }} </td>
                 <td>{{ $item->days ? $item->days :  $item->months }} {{ $item->days ? 'hari' : 'Bulan' }} </td>
-                <td>{{ $item->status }} IDR</td>
+                <td>
+        @if($item->status == 'checking')
+        <span class="badge badge-pill badge-primary">{{ $item->status }}</span>
+        @elseif($item->status == 'pending')
+        <span class="badge badge-pill badge-warning">{{ $item->status }}</span>
+        @else
+        <span class="badge badge-pill badge-secondary">{{ $item->status }}</span>
+        @endif</td>
                 <td>
                   <a href="/admin/transaction/{{ $item->id }}">Detail</a>
                 </td>

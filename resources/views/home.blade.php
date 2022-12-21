@@ -44,7 +44,7 @@
   </section>
   <section class="list mt-5 pb-5">
     <div class="container">
-      <h2 class="fw-bold">Kosan Terbaru</h2>
+      <h2 class="fw-bold">Kamar Terbaru</h2>
       <div class="row mt-4">
         @foreach ($rooms as $key => $room )
           <div class="col-md-4">
