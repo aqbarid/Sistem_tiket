@@ -62,9 +62,9 @@ class CheckoutController extends BaseController {
   }
 
   public function successPayment($id, Transaction $trs, Payment $pay) {
-    //$payments = $pay->paymentDetails($id);
+    //$payments = $pay->paymentDetails($transaction_id);
     $transaction = $trs->detailTransaction($id);
-    dd($transactions);
+   //dd($transactions);
 
     return $this->view('checkout.success', ['transaction' => $transaction]);
   }

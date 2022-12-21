@@ -17,6 +17,7 @@ class AdminController extends BaseController {
     $totalWaiting = $trs->countTotalWaiting()->count ?? 0;
     $totalIncome = $trs->countTotalIncome()->income ?? 0;
     $totalRoom = $rm->countAll()->count ?? 0;
+    //$detailtransaction = $trs->detailTransaction();
 
     return $this->view('admin.index', [
       'user' => $user,
@@ -24,7 +25,8 @@ class AdminController extends BaseController {
       'totalTransaction' => $totalTransaction,
       'totalWaiting' => $totalWaiting,
       'totalIncome' => $totalIncome,
-      'totalRoom' => $totalRoom
+      'totalRoom' => $totalRoom,
+      //'detailTransaction' => $detailtransaction
     ]);
   }
 
@@ -56,12 +58,17 @@ class AdminController extends BaseController {
     return $this->view('admin.transaction', ['transactions' => $transactions, 'totalTransaction' => $totalTransaction]);
   }
 
+  public function changeTransactionStatus($transactionId, $status, Transaction $trx) {
+    $trx->setStatus($transactionId, $status);
+    $this->redirect("/admin/transaction/{$transactionId}");
+  }
+
   public function detailTransaction($transactionId, Request $request, Transaction $ts, Payment $py) {
     $payments = $py->whereBy('transaction_id', $transactionId);
 
     $transaction = $ts->detailTransaction($transactionId);
-
-    dd($transaction);
+    //dd($transaction);
+    return $this->view('admin.transaction.detail', ['transaction' => $transaction, 'payments' => $payments]);
   }
 }
 

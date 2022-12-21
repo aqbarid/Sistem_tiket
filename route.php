@@ -77,5 +77,6 @@ Route::middleware([AuthMiddleware::class])
         Route::get('/transactions', [AdminController::class, 'transaction']);
         Route::get('/transaction/{id}', [AdminController::class, 'detailTransaction']);
         Route::post('/transaction/{id}', [AdminController::class, 'processTransaction']);
+        Route::post('/transaction/change/{id}/{status}', [AdminController::class, 'changeTransactionStatus']);
 });
 

@@ -27,17 +27,17 @@
       <tr>
         <td>Bank </td>
         <td>:</td>
-        <td>{{ $payments->bank }} </td>
+        <td>{{ $transaction->bank }} </td>
       </tr>
       <tr>
         <td>Nama </td>
         <td>:</td>
-        <td>{{ $payments->account_name }} </td>
+        <td>{{ $transaction->account_name }} </td>
       </tr>
       <tr>
         <td>Nomor Akun </td>
         <td>:</td>
-        <td>{{ $payments->account_number }} </td>
+        <td>{{ $transaction->account_number }} </td>
       </tr>
       <tr>
         <td>Lama Penyewaan </td>

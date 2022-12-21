@@ -119,6 +119,7 @@ class Transaction extends Model {
     return $this->runQuery('
       SELECT
       t.*,
+      pay.*,
       r.name AS room_name,
       r.id AS room_id,
       p.name AS place_name,
@@ -137,6 +138,8 @@ class Transaction extends Model {
       LEFT JOIN
       users AS ad
       ON ad.id = t.admin_id
+      LEFT JOIN payments as pay
+      ON pay.transaction_id = t.id
       WHERE t.id = ?
     ', [$id], 'first');
   }
@@ -188,7 +191,7 @@ class Transaction extends Model {
   }
 
   public function setStatus($id, $status = 'checking') {
-    $this->runQuery("UPDATE transactions SET status = ? WHERE id = ?", [$status, $id]);
+    return $this->runQuery("UPDATE transactions SET status = ? WHERE id = ?", [$status, $id]);
   }
 
   public function countTotalIncome() {
